@@ -1,2 +1,2 @@
 build:
-	g++ -g -o bin/main src/main.cpp
+	g++ -g -o bin/e1 src/e1.cpp
