@@ -19,12 +19,12 @@ vector<int> countingSort(vector<int> &v,int digit, int base){
     int n = v.size();
     vector<int> res(n);
     // map that counts number of occurrences of the digits in v
-    vector<int> occur(base);
+    map<int,int> occur;
 
     // counts the number of occurences of each digit in A
     for (int i = 0; i < v.size(); i++){
         int digit_of_v_i=  int( v[i] / pow(base, digit) )  % base;
-        occur[digit_of_v_i]++;
+        occur[digit_of_v_i++];
     }
 
     /*
@@ -60,8 +60,9 @@ void print_vector(vector<int> &v){
 }
 
 int main(){
-    array<int, 9> arr = {111, 222, 3333, 444444, 1, 9, 8, 7, 6};
-    vector<int> v(arr.begin(), arr.end());
+    array<int, 9> arr = {1, 2, 3, 4, 5, 9, 8, 7, 6};
+    vector<int> v;v.push_back(0);v.push_back(1);
+    cout << v[8] << endl;
     radixSort(v, 10);
     print_vector(v);
     return 0;
