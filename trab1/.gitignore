@@ -1,0 +1,4 @@
+test
+.vscode
+*.dSYM
+bin/*
