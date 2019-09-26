@@ -1,4 +1,4 @@
 test
 .vscode
 *.dSYM
-bin/*
+bin/*.dSYM
