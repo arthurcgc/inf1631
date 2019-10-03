@@ -1,62 +1,81 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <iostream>
-#include <vector>
-#include <stack>
-#include <unordered_set>
+#include <assert.h>
 
+#define num 5
 using namespace std;
 
-typedef struct node Node;
-typedef struct graph Graph;
-
-struct node{
-    int val;
-    vector<Node*> adj;
+int grafo[num][num] = {
+   {0, 1, 0, 1, 0},
+   {1, 0, 1, 1, 1},
+   {0, 1, 0, 0, 1},
+   {1, 1, 0, 0, 1},
+   {0, 1, 1, 1, 0},
 };
 
-struct graph{
-    vector<Node*> nodes;
-};
+ int grafo[num][num] = {
+   {0, 1, 0, 1, 0},
+   {1, 0, 1, 1, 1},
+   {0, 1, 0, 0, 1},
+   {1, 1, 0, 0, 0},
+   {0, 1, 1, 0, 0},
+}; 
 
+int p[num];
 
+void mostra() {// printa na tela o ciclo se hamiltoniano
+	cout << "Ciclo: ";
 
-void visit(Node *n){
-    cout << "Node: " << n->val << endl;
+	for (int i = 0; i < num; i++)
+		cout << p[i] << " ";
+	cout << p[0] << endl;
 }
 
-void DFS(graph &g){
-    stack<Node*> s;
-    unordered_set<Node*> visited;
-    s.push(g.nodes[0]);
+bool valido(int v, int k) {// verifica se tem vertice, se ja tiver ocupado, para ambos os casos retorna false, se nao, retorna true
+	if (grafo[p[k - 1]][v] == 0)
+		return false;
 
-    while(!s.empty()){
-        Node *curr = s.top();
-        s.pop();
-        if(visited.count(curr) <= 0){
-            visit(curr);
-            visited.insert(curr);
-            for(Node *to_visit : curr->adj)
-                s.push(to_visit);
-        }
-    }
+	for (int i = 0; i < k; i++)
+		if (p[i] == v)
+			return false;
+	return true;
 }
 
-int main(){
-    Node *n1, *n2, *n3, *n4, *n5, *n6;
-    n1 = new Node(); n2 = new Node(); n3 = new Node();
-    n4 = new Node(); n5 = new Node(); n6 = new Node();
-    n1->val = 0; n2->val = 1; n3->val = 2;
-    n4->val = 3; n5->val = 4; n6->val = 5;
+bool achaciclo(int k) {// confere se todos os vertices estao no passeio, verifica se pode realizar um ciclo
+	if (k == num) {
+		if (grafo[p[k - 1]][p[0]] == 1)
+			return true;
+		else
+			return false;
+	}
 
-    n1->adj.push_back(n2); n1->adj.push_back(n5);
-    n2->adj.push_back(n3); n2->adj.push_back(n4); n2->adj.push_back(n1);
-    n3->adj.push_back(n2); n3->adj.push_back(n4); 
-    n4->adj.push_back(n3); n4->adj.push_back(n6); 
-    n5->adj.push_back(n1); n5->adj.push_back(n6); 
-    n6->adj.push_back(n4); n6->adj.push_back(n5); 
+	for (int v = 1; v < num; v++) {
+		if (valido(v, k)) {
+			p[k] = v;
+			if (achaciclo(k + 1) == true)
+				return true;
+			p[k] = -1;
+		}
+	}
+	return false;
+}
 
-    Graph g; 
-    g.nodes.push_back(n1);g.nodes.push_back(n2);g.nodes.push_back(n3);
-    g.nodes.push_back(n4);g.nodes.push_back(n5);g.nodes.push_back(n6);
+bool hamiltoniano() {
+	for (int i = 0; i < num; i++)
+		p[i] = -1;
+	p[0] = 0; //first vertex as 0
 
-    DFS(g);
+	if (achaciclo(1) == false) {
+		cout << "Nao tem solucao" << endl;
+		return false;
+	}
+
+	mostra();
+	return true;
+}
+
+int main() {
+	hamiltoniano();
 }
