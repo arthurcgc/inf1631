@@ -1,0 +1,9 @@
+o que veremos de grafos:
+- Definições
+- representação computacional
+- busca
+- complexidade
+- caminho euleriano
+- caminho mais curto
+- arvores <uninteligible> mínimas
+- "extras"
