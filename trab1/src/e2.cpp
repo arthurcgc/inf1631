@@ -85,38 +85,18 @@ map<string, int> tests(){
 }
 
 int main(){
-    // vector<pair<vector<int>, int > > vectors;
-    // array<int, 9> arr1 = {111, 222, 3333, 444444, 1, 9, 8, 7, 6};
-    // vector<int> v1(arr1.begin(), arr1.end());
-    // vectors.push_back(make_pair(v1, 10));
-
-
-    // array<int, 6> arr2 = {0b0111, 0b1001, 0b0001, 0b0011, 0b1011, 0b1111};
-    // vector<int> v2(arr2.begin(), arr2.end());
-    // vectors.push_back(make_pair(v2, 2));
-
-
-    // array<int, 6> arr3 = {0xa2, 0xa1, 0xa, 0xbf, 0xc43, 0x01};
-    // vector<int> v3(arr3.begin(), arr3.end());
-    // vectors.push_back(make_pair(v3, 16));
-
-    // for(int i = 0; i < vectors.size(); i++){
-    //     vector<int> vit = vectors[i].first;
-    //     int base = vectors[i].second;
-    //     radixSort(vit, base);
-    //     print_vector(vit);
-    // }
-
     map<string, int> test_case = tests();
     vector< vector<int> > intvecs;
+
+    // we can set different bases if we want to, but it's not clear in the test cases
     int base = 10;
 
+
     for(map<string, int>::iterator it = test_case.begin(); it != test_case.end(); it++){
-        cout << it->first << endl;
-        vector<int> v = parse(it->first);
+        string test_name = it->first;
+        vector<int> v = parse(test_name);
         radixSort(v, base);
-        cout << "---TEST NAME: " + it->first + "---\n" << endl;
-        print_vector(v);
+        write_results(v, test_name);
     }
 
     return 0;

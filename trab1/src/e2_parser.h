@@ -14,3 +14,4 @@
 using namespace std;
 
 vector<int> parse(string test_name);
+void write_results(vector<int> v, string test_name);
