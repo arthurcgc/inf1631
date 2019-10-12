@@ -22,7 +22,7 @@ e3: clean build-e3
 	rm -rf e3_results/*
 	./bin/e3
 
-all: e1 e2
+all: e1 e2 e3
 
 clean:
 	rm -rf bin/*
