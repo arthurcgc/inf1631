@@ -5,7 +5,7 @@
 #include <map>
 #include <array>
 #include <algorithm>
-#include "e2_parser.h"
+#include "parser.h"
 
 using namespace std;
 
@@ -95,7 +95,7 @@ int main(){
 
     for(map<string, int>::iterator it = test_case.begin(); it != test_case.end(); it++){
         string test_name = it->first;
-        vector<int> v = parse(test_name);
+        vector<int> v = parse_e2(test_name);
         radixSort(v, base);
         write_results(v, test_name);
     }

@@ -1,13 +1,6 @@
-#include "e2_parser.h"
+#include "parser.h"
 
-std::string GetCurrentWorkingDir( void ) {
-  char buff[FILENAME_MAX];
-  GetCurrentDir( buff, FILENAME_MAX );
-  std::string current_working_dir(buff);
-  return current_working_dir;
-}
-
-vector<int> parse(string test_name){
+vector<int> parse_e2(string test_name){
     string path = GetCurrentWorkingDir() + "/e2_testfiles/" + test_name;
     vector<int> res;
     ifstream fp(path, ifstream::in);

@@ -2,6 +2,8 @@
 #include <vector>
 #include <unordered_set>
 
+#include "parser.h"
+
 using namespace std;
 
 
@@ -77,10 +79,9 @@ bool hamCycleUtil( vector<vector<bool> >&graph,
 /* A utility function to print solution */
 void printSolution(vector<int> &path)  
 {  
-    cout << "Solution Exists:"
-            " Following is one Hamiltonian Cycle \n";  
+    cout << "Solution Exists, Hamiltonian Cycle: \n";  
     for(int &num : path)
-        cout << num << " ";  
+        cout << num << "->";  
   
     // Let us print the first vertex again 
     // to show the complete cycle  
@@ -88,7 +89,7 @@ void printSolution(vector<int> &path)
     cout << endl; 
 }  
 
-bool hamCycle(vector<vector<bool> > graph)  
+bool hamCycle(vector<vector<bool> > graph, string test)  
 {  
     vector<int> path(graph[0].size());
     unordered_set<int> visited;
@@ -100,11 +101,13 @@ bool hamCycle(vector<vector<bool> > graph)
 
     if (hamCycleUtil(graph, path, visited, 1) == false )  
     {  
-        cout << "\nSolution does not exist";  
+        // cout << "Solution does not exist" << endl;  
+        write_failure(test);
         return false;  
     }  
   
-    printSolution(path);  
+    // printSolution(path);  
+    write_results(path, test);
     return true;  
 }  
 
@@ -116,22 +119,41 @@ vector<vector<bool>> init_graph(int r, int c){
     return g;
 }
 
+vector<string> test_names(){
+    vector<string> tests;
+    tests.push_back("Hamilton_10_1.txt");
+    tests.push_back("Hamilton_20_1.txt");
+    tests.push_back("Hamilton_20_2.txt");
+    tests.push_back("Hamilton_20_3.txt");
+    tests.push_back("Hamilton_20_4.txt");
+    tests.push_back("Hamilton_20_5.txt");
+    tests.push_back("Hamilton_50_1.txt");
+    tests.push_back("Hamilton_50_2.txt");
+    tests.push_back("Hamilton_50_3.txt");
+    tests.push_back("Hamilton_50_4.txt");
+    tests.push_back("Hamilton_50_5.txt");
+    tests.push_back("Hamilton_100_1.txt");
+    tests.push_back("Hamilton_100_2.txt");
+    tests.push_back("Hamilton_100_3.txt");
+    tests.push_back("Hamilton_100_4.txt");
+    tests.push_back("Hamilton_100_5.txt");
+    tests.push_back("Hamilton_200_1.txt");
+    tests.push_back("Hamilton_200_2.txt");
+    tests.push_back("Hamilton_500_1.txt");
+    tests.push_back("Hamilton_500_2.txt");
+
+    return tests;
+}
+
 
 int main(int argc, char const *argv[])
 {
-    vector<vector<bool>> graph1 = init_graph(5, 5);
-    graph1[0][0] = 0; graph1[0][1] = 1; graph1[0][2]= 0; graph1[0][3] = 1; graph1[0][4] = 0;
+    vector<string> tests = test_names();
 
-    graph1[1][0] = 1; graph1[1][1] = 0; graph1[1][2]= 1; graph1[1][3] = 1; graph1[1][4] = 1;
+    for(string &name : tests){
+        vector<vector<bool> > graph = parse_e3(name);
+        hamCycle(graph, name);
+    }
 
-    graph1[2][0] = 0; graph1[2][1] = 1; graph1[2][2]= 0; graph1[2][3] = 0; graph1[2][4] = 1;
-
-    graph1[3][0] = 1; graph1[3][1] = 1; graph1[3][2]= 0; graph1[3][3] = 0; graph1[3][4] = 1;
-
-    graph1[4][0] = 0; graph1[4][1] = 1; graph1[4][2]= 1; graph1[4][3] = 1; graph1[4][4] = 0; 
-      
-    // Print the solution  
-    hamCycle(graph1);
-  
     return 0;
 }
