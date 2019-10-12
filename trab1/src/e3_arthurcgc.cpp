@@ -46,8 +46,11 @@ bool hamCycleUtil( vector<vector<bool> >&graph,
     // Try different vertices as a next candidate  
     // in Hamiltonian Cycle. We don't try for 0 as  
     // we included 0 as starting point in hamCycle()  
-    for (int v = 1; v < graph[0].size(); v++)
+    for (int v = 0; v < graph[0].size(); v++)
     {  
+        if( v == path[0])
+            continue;
+            
         /* Check if this vertex can be added  
         // to Hamiltonian Cycle */
         if (is_safe(v, graph, path, visited, pos))  
@@ -96,19 +99,21 @@ bool hamCycle(vector<vector<bool> > graph, string test)
     /* Let us put vertex 0 as the first vertex in the path. 
     If there is a Hamiltonian Cycle, then the path can be  
     started from any point of the cycle as the graph is undirected */
-    path[0] = 0;
-    visited.insert(0);
+    for(int i = 0; i < graph[0].size(); i++){
+        path[0] = i;
+        visited.insert(i);
+        if (hamCycleUtil(graph, path, visited, 1) == true ){
+            write_results(path, test);
+            return true;  
+        }
+        else{
+            path = vector<int>(graph[0].size());
+            visited.clear();
+        }
+    }
 
-    if (hamCycleUtil(graph, path, visited, 1) == false )  
-    {  
-        // cout << "Solution does not exist" << endl;  
-        write_failure(test);
-        return false;  
-    }  
-  
-    // printSolution(path);  
-    write_results(path, test);
-    return true;  
+    write_failure(test);
+    return false;  
 }  
 
 vector<vector<bool>> init_graph(int r, int c){

@@ -50,8 +50,8 @@ void write_results(vector<int> v, string test_name){
     string path = GetCurrentWorkingDir() + "/e3_results/" + "RES_" + test_name;
     ofstream test_out(path, fstream::out);
     for(int &num : v){
-        test_out << num << " -> ";
+        test_out << num + 1 << " -> ";
     }
-    test_out << v[0];
+    test_out << v[0] + 1;
     test_out.close();
 }
