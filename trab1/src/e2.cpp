@@ -4,6 +4,7 @@
 #include <math.h>
 #include <map>
 #include <array>
+#include <algorithm>
 #include "e2_parser.h"
 
 using namespace std;
