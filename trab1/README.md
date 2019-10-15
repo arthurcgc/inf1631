@@ -23,7 +23,9 @@ e1.cpp
 
 e2.cpp
 
-e3.cpp
+ex03.py (arquivo correto da demonstração)
+
+e3.cpp ( arquivo complementar)
 
 - Arquivo leiame:
 
@@ -33,4 +35,9 @@ README.md
 
 ————— Modo de uso ————— 
 
-Você pode optar por usar os comandos do makefile no seu terminal ou utilizando a interface do visual sudio code.
+Para executar o arquivo em python:
+ 1) Colocar o arquivo de nome ex03.py na mesma pasta dos testes(e3_testfiles) juntamente com o CPUtimer.py .
+ 2) Na sua linha de comando, escreva: pyton ex03.py <nome do arquivo de teste contido na página> .
+ 3) O programa será executado exibindo o cálculo do tempo do teste desejado e todos os caminhos possíveis.
+ 4) Para exibir apenas o tempo, comente a impressão print(path)
+ OBS: Dependendo do caminho utilizado, pode demorar um tempo.
