@@ -1,5 +1,5 @@
 import sys
-import CPUtimer
+
 def read_file(file):
     file_name=file[1]
     mynumbers=[]
@@ -34,8 +34,9 @@ def find_all_paths(graph, start,end, path=[]):
     for node in graph:
         if node not in path:
             newpaths=find_all_paths(graph,node,end,path)
-            for newpaths in newpaths:
-                paths.append(newpaths)
+            if newpaths in newpaths:
+                if newpaths not in path:
+                    paths.append(newpaths)
     return paths
 
 def find_cycle(graph):
@@ -45,30 +46,15 @@ def find_cycle(graph):
             newpaths= find_all_paths(graph,startnode,endnode)
             for path in newpaths:
                 if(len(path)==len(graph)):
-                    #print(path)
+                   # print(path)
                     cycles.append(path)
     return cycles
     
 
 graph = read_file(sys.argv)
 
-timer = CPUtimer.CPUTimer()
-
 
 print("")
-print("Medindo codigo rápido repetido diversas vezes:")
-timer.reset()
-timer.start()
-print ("Finding Hamiltonian Cycles----")
-for i in range(0, 1):  
-    a= find_cycle(graph)
-    print ("Number of Hamiltonian Cycles=", len(a))
-    print ("done!")
-    timer.lap()
-timer.stop()
-
-print("Tempo Total: " + str( timer.get_time() ) +" s")
-print("Tempo Medio: " + str( timer.get_time("average","micro") ) +" \u00B5s")
-print("Ultima Chamada: " + str( timer.get_time("last","micro") ) +" \u00B5s")
-print("Estampa 1 do total: " + str( timer.get_stamp("total","si") ) ) 
-print("Estampa 2 do total: " + str( timer.get_stamp("total","clock") ) )
+print ("Ciclos")
+a= find_cycle(graph)
+print ("done!")

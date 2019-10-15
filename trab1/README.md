@@ -23,9 +23,11 @@ e1.cpp
 
 e2.cpp
 
-ex03.py (arquivo correto da demonstração)
+e3_arthutcgc.cpp ( outra abordagem para o problema porém não confirma todas os ciclos)
 
-e3.cpp ( arquivo complementar)
+ex03.py (programa correto da demonstração)
+
+e3.cpp ( programa complementar)
 
 - Arquivo leiame:
 
