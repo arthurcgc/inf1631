@@ -6,7 +6,7 @@
 
 using namespace std;
 
-
+ 
 /*
     vector path represents the bucket of vertexes that are adjacent to each other, it stores the graph indexes
 */
@@ -116,8 +116,8 @@ bool hamCycle(vector<vector<bool> > graph, string test)
     return false;  
 }  
 
-vector<vector<bool>> init_graph(int r, int c){
-    vector<vector<bool>> g;
+vector<vector<bool> > init_graph(int r, int c){
+    vector<vector<bool> > g;
     for(int i = 0; i < r; i++){
         g.push_back(vector<bool>(c));
     }
